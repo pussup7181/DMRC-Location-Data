@@ -6,14 +6,14 @@ import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, setPersist
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDEoGSXWsvHphRQQoWnKg7o9Q3T2eB9jZ4",
-  authDomain: "indoornavigation-429fd.firebaseapp.com",
-  databaseURL: "https://indoornavigation-429fd-default-rtdb.firebaseio.com",
-  projectId: "indoornavigation-429fd",
-  storageBucket: "indoornavigation-429fd.appspot.com",
-  messagingSenderId: "825368707275",
-  appId: "1:825368707275:web:fae0c6e24365e5f570db4e",
-  measurementId: "${config.measurementId}"
+  apiKey: "AIzaSyAo1QNDosdfxsDIZ5LejWB0sQwJWLI3Gu4",
+  authDomain: "dmrc-metro.firebaseapp.com",
+  databaseURL: "https://dmrc-metro-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "dmrc-metro",
+  storageBucket: "dmrc-metro.appspot.com",
+  messagingSenderId: "565647665542",
+  appId: "1:565647665542:web:0f83a3863307263bcae407",
+  measurementId: "G-1X0T4R2VR7"
 };
 
 // Initialize Firebase
