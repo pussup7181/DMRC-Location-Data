@@ -54,13 +54,17 @@ const firebaseConfig = {
   var table_ground = document.getElementById("table-ground");
   var table_first = document.getElementById("table-first");
   var table_second = document.getElementById("table-second");
-var location_select = documemnt.getElementById("maps");
 
+var location_select = documemnt.getElementById("maps");
+var gatishakti = document.getElementById("gatishaktiBhawan");
+var stations = document.getElementById("station_data")
 location_select.addEventListener("location", ()=>{
 	switch(location_select.selectedIndex){
-		case 0:
+		case 0:gatishakti.style.display = "block";
+				stations.style.display = "none";
 			break;
-		case 1:
+		case 1:gatishakti.style.display = "none";
+				stations.style.display = "block";
 			break;
 	}
 });
