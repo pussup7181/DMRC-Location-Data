@@ -106,6 +106,24 @@
     </div>
   	</div>  
 	</div>
+	
+	<div class="container-fluid mt-5 pt-5" id="selectMap">
+		<div class="mx-auto" >
+			<div class="d-flex justify-content-center">
+				<label for="maps">Select Location</label>
+				
+				<select name="maps" id="maps">
+					  <option value="gatishakti">Gatishakti Bhawan</option>
+					  <option value="delhi_haat_ina">Delhi Haat INA</option>
+				</select>
+			</div>
+		
+		</div>
+	</div>
+	<!-- station Data -->
+	<div class="container-fluid mt-5 pt-5" style="display: block" id="station_data" >
+		
+	</div>
   	<div class="container-fluid mt-5 pt-5" style="display: block" id="seat_data" >
 		<div class="row">
 		<form class="col-sm-4">
@@ -429,6 +447,7 @@
 	  </div>
 	</div>
 	</div>
+	
 	<!-- PDF -->
 	<div class="p-5" style="width:800px;" >
 		<div id="table-ground" style="display: none" class="container">
@@ -1049,6 +1068,7 @@
     <script src="js/popper.min.js"></script>
   	<script src="js/bootstrap-4.4.1.js"></script>
 	<script type="module" src="js/index.js"></script>
+	<script type="module" src="js/stationLocation.js"></script>
 	<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 	<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
 	<script src="js/jspdf.plugin.autotable.js"></script>

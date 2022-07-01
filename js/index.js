@@ -54,6 +54,16 @@ const firebaseConfig = {
   var table_ground = document.getElementById("table-ground");
   var table_first = document.getElementById("table-first");
   var table_second = document.getElementById("table-second");
+var location_select = documemnt.getElementById("maps");
+
+location_select.addEventListener("location", ()=>{
+	switch(location_select.selectedIndex){
+		case 0:
+			break;
+		case 1:
+			break;
+	}
+});
 
 map_select.addEventListener("change",()=>{
 	switch(map_select.selectedIndex){
