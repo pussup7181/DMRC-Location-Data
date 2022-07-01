@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NCRTC - Seating Arrangement</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+	<script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    </head>
+<body>
+	<nav class="bg-dark row navbar fixed-top">
+      <a class="navbar-brand  text-white mx-5" href="#">Seating Arrangement</a>
+		<div class="nav justify-content-end" id="user_utility"  style="display: none">
+	  <button type="button" class="btn btn-primary m-1" id="logout-button">Log Out</button>
+		<!--<button type="button" class="btn btn-primary m-1" id="refresh-button">Refresh</button>-->
+
+		</div>
+	</nav>
+	<div class="container-fluid mt-5 pt-5" id="cred_area">
+		<div class="mx-auto" >
+			<div class="d-flex justify-content-center">
+				<button type="button" class="btn btn-primary m-1"  data-toggle="modal" data-target="#login-form">Log In</button>
+			</div>
+		<div class="d-flex justify-content-center">
+			<!--<button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#signup-form">SignUp</button></div> -->
+		</div>
+	</div>
+  <!-- Sign In Modal -->
+	<div class="modal" id="login-form">
+		<div class="mdal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Log-In</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<label for="login-email">Email address</label>
+							<input type="email" class="form-control" id="login-email" placeholder="Enter email">
+							<label for="login-password">Password</label>
+							<input type="password" class="form-control" id="login-password" placeholder="Password">
+
+				</div>
+				<button type="submit" class="btn btn-primary" id="login-button" data-dismiss="modal">Login</button>
+			  </form>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+			</div>
+
+		  </div>
+		</div>
+	  </div> 
+
+	  <!-- Sign Up Modal -->
+	<div class="modal" id="signup-form">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Sign-Up</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+				<!--<label for="name">Name</label>
+				<input type="text" class="form-control" id="name" placeholder="Name">
+				<label for="designation">Designation</label>
+				<input type="text" class="form-control" id="designation" placeholder="Designation">
+				-->
+              <label for="signup-email">Email address</label>
+              <input type="email" class="form-control" id="signup-email" placeholder="Enter email">
+            
+              <label for="signup-password">Password</label>
+              <input type="password" class="form-control" id="signup-password" placeholder="Password">
+            
+		    </div>
+            <button type="submit" class="btn btn-primary" id="signup-button" data-dismiss="modal">SignUp</button>
+          </form>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  	</div>  
+	</div>
+  	<div class="container-fluid mt-5 pt-5" style="display: block" id="seat_data" >
+		<div class="row">
+		<form class="col-sm-4">
+			<div class="form-group">
+			  <select class="form-control" id="floor_map">
+				<option value="1">GROUND FLOOR</option>
+				<option value="2">FIRST FLOOR</option>
+				<option value="3">SECOND FLOOR</option>
+			  </select>
+			</div>
+
+		</form>
+			<div class="col-sm-2">
+				<button type="button" class="btn btn-primary " id="print-button" >Print to PDF</button>
+			</div>
+		</div>
+	<div class="container-fluid">
+	  <div class="row">
+		<div class="col-lg-6" id="ground_floor">
+			<img src="images/0001.jpg" alt="" width="500" usemap="#ground_map" id="ground_map"/>
+  		  <map name="ground_map">
+		 	<area shape="rect" coords="178,54,214,79" href="#" target="GE1" id="GE1" style="cursor: pointer">
+		 	<area shape="rect" coords="179,22,215,46" href="#" target="GE2" id="GE2" style="cursor: pointer">
+		 	<area shape="rect" coords="225,21,239,37" href="#" target="GW7" id="GW7" style="cursor: pointer">
+		 	<area shape="rect" coords="225,37,238,48" href="#" target="GW6" id="GW6" style="cursor: pointer">
+		 	<area shape="rect" coords="224,50,238,62" href="#" target="GW5" id="GW5" style="cursor: pointer">
+		 	<area shape="rect" coords="222,63,236,77" href="#" target="GW4" id="GW4" style="cursor: pointer">
+            <area shape="rect" coords="242,22,254,34" href="#" target="GW8" id="GW8" style="cursor: pointer">
+            <area shape="rect" coords="241,36,254,51" href="#" target="GW9" id="GW9" style="cursor: pointer">
+            <area shape="rect" coords="241,52,255,63" href="#" target="GW10" id="GW10" style="cursor: pointer">
+            <area shape="rect" coords="241,63,254,76" href="#" target="GW11" id="GW11" style="cursor: pointer">
+            <area shape="rect" coords="257,21,274,33" href="#" target="GW15" id="GW15" style="cursor: pointer">
+            <area shape="rect" coords="256,35,272,47" href="#" target="GW14" id="GW14" style="cursor: pointer">
+            <area shape="rect" coords="258,50,271,61" href="#" target="GW13" id="GW13" style="cursor: pointer">
+            <area shape="rect" coords="256,64,272,77" href="#" target="GW12" id="GW12" style="cursor: pointer">
+            <area shape="rect" coords="291,20,338,79" href="#" target="GC1" id="GC1" style="cursor: pointer">
+            <area shape="rect" coords="365,107,390,145" href="#" target="GE6" id="GE6" style="cursor: pointer">
+            <area shape="rect" coords="365,143,390,179" href="#" target="GE5" id="GE5" style="cursor: pointer">
+            <area shape="rect" coords="231,143,264,179" href="#" target="GE4" id="GE4" style="cursor: pointer">
+            <area shape="rect" coords="232,106,263,144" href="#" target="GE3" id="GE3" style="cursor: pointer">
+            <area shape="rect" coords="267,107,282,123" href="#" target="GW17" id="GW17" style="cursor: pointer">
+			<area shape="rect" coords="265,124,282,137" href="#" target="GW18" id="GW18" style="cursor: pointer">
+			<area shape="rect" coords="265,138,283,151" href="#" target="GW19" id="GW19" style="cursor: pointer">
+			<area shape="rect" coords="266,151,282,164" href="#" target="GW20" id="GW20" style="cursor: pointer">
+			<area shape="rect" coords="266,165,284,179" href="#" target="GW21" id="GW21" style="cursor: pointer">
+			<area shape="rect" coords="285,164,300,180" href="#" target="GW22" id="GW22" style="cursor: pointer">
+			<area shape="rect" coords="286,150,301,163" href="#" target="GW23" id="GW23" style="cursor: pointer">
+			<area shape="rect" coords="286,137,300,150" href="#" target="GW24" id="GW24" style="cursor: pointer">
+			<area shape="rect" coords="286,125,299,139" href="#" target="GW25" id="GW25" style="cursor: pointer">
+			<area shape="rect" coords="287,108,299,124" href="#" target="GW26" id="GW26" style="cursor: pointer">
+			<area shape="rect" coords="320,110,336,125" href="#" target="GW27" id="GW27" style="cursor: pointer">
+			<area shape="rect" coords="319,127,334,137" href="#" target="GW28" id="GW28" style="cursor: pointer">
+			<area shape="rect" coords="318,139,333,151" href="#" target="GW29" id="GW29" style="cursor: pointer">
+			<area shape="rect" coords="319,151,332,165" href="#" target="GW30" id="GW30" style="cursor: pointer">
+			<area shape="rect" coords="318,164,334,177" href="#" target="GW31" id="GW31" style="cursor: pointer">
+			<area shape="rect" coords="338,164,352,177" href="#" target="GW32" id="GW32" style="cursor: pointer">
+			<area shape="rect" coords="337,151,353,161" href="#" target="GW33" id="GW33" style="cursor: pointer">
+			<area shape="rect" coords="339,139,353,149" href="#" target="GW34" id="GW34" style="cursor: pointer">
+			<area shape="rect" coords="338,125,352,136" href="#" target="GW35" id="GW35" style="cursor: pointer">
+			<area shape="rect" coords="340,111,351,125" href="#" target="GW36" id="GW36" style="cursor: pointer">
+  		  </map>
+		</div>
+		  <div class="col-lg-6" id="first_floor" style="display: none">
+			<img src="images/0002.jpg" alt="" width="500" usemap="#first_map" id="first_map"/>
+		 		<map name="first_map">
+					<area shape="rect" coords="8,123,49,149" href="#" target="FE4" id="FE4" style="cursor: pointer">
+					<area shape="rect" coords="9,147,50,172" href="#" target="FE3" id="FE3" style="cursor: pointer">
+					<area shape="rect" coords="12,180,45,204" href="#" target="FE2" id="FE2" style="cursor: pointer">
+					<area shape="rect" coords="12,203,47,227" href="#" target="FE1" id="FE1" style="cursor: pointer">
+					<area shape="rect" coords="11,235,46,260" href="#" target="FE41" id="FE41" style="cursor: pointer">
+					<area shape="rect" coords="10,259,49,281" href="#" target="FE40" id="FE40" style="cursor: pointer">
+					<area shape="rect" coords="11,288,47,312" href="#" target="FE39" id="FE39" style="cursor: pointer">
+					<area shape="rect" coords="7,313,73,356" href="#" target="FC11" id="FC11" style="cursor: pointer">
+					<area shape="rect" coords="7,391,71,430" href="#" target="FC10" id="FC10" style="cursor: pointer">
+					<area shape="rect" coords="181,427,217,476" href="#" target="FC8" id="FC8" style="cursor: pointer">
+					<area shape="rect" coords="223,427,261,476" href="#" target="FC7" id="FC7" style="cursor: pointer">
+					<area shape="rect" coords="309,426,346,476" href="#" target="FC6" id="FC6" style="cursor: pointer">
+					<area shape="rect" coords="426,397,485,443" href="#" target="FC5" id="FC5" style="cursor: pointer">
+					<area shape="rect" coords="428,318,485,359" href="#" target="FC4" id="FC4" style="cursor: pointer">
+					<area shape="rect" coords="458,278,486,319" href="#" target="FE23" id="FE23" style="cursor: pointer">
+					<area shape="rect" coords="426,278,452,319" href="#" target="FE24" id="FE24" style="cursor: pointer">
+					<area shape="rect" coords="448,248,487,272" href="#" target="FE22" id="FE22" style="cursor: pointer">
+					<area shape="rect" coords="448,224,488,249" href="#" target="FE21" id="FE21" style="cursor: pointer">
+					<area shape="rect" coords="459,186,485,215" href="#" target="FE20" id="FE20" style="cursor: pointer">
+					<area shape="rect" coords="429,186,450,217" href="#" target="FE19" id="FE19" style="cursor: pointer">
+					<area shape="rect" coords="427,140,488,184" href="#" target="FC3" id="FC3" style="cursor: pointer">
+					<area shape="rect" coords="295,22,337,78" href="#" target="FC2" id="FC2" style="cursor: pointer">
+					<area shape="rect" coords="148,20,194,77" href="#" target="FC1" id="FC1" style="cursor: pointer">
+					<area shape="rect" coords="100,102,126,143" href="#" target="FE7" id="FE7" style="cursor: pointer">
+					<area shape="rect" coords="100,142,125,178" href="#" target="FE6" id="FE6" style="cursor: pointer">
+					<area shape="rect" coords="134,106,159,144" href="#" target="FE8" id="FE8" style="cursor: pointer">
+					<area shape="rect" coords="136,141,158,177" href="#" target="FE10" id="FE10" style="cursor: pointer">
+					<area shape="rect" coords="159,108,180,143" href="#" target="FE9" id="FE9" style="cursor: pointer">
+					<area shape="rect" coords="157,145,182,177" href="#" target="FE11" id="FE11" style="cursor: pointer">
+					<area shape="rect" coords="137,187,175,212" href="#" target="FE5" id="FE5" style="cursor: pointer">
+					<area shape="rect" coords="290,107,319,144" href="#" target="FE12" id="FE12" style="cursor: pointer">
+					<area shape="rect" coords="294,143,320,178" href="#" target="FE15" id="FE15" style="cursor: pointer">
+					<area shape="rect" coords="318,106,342,143" href="#" target="FE13" id="FE13" style="cursor: pointer">
+					<area shape="rect" coords="319,141,340,178" href="#" target="FE16" id="FE16" style="cursor: pointer">
+					<area shape="rect" coords="353,111,374,140" href="#" target="FE14" id="FE14" style="cursor: pointer">
+					<area shape="rect" coords="352,147,372,177" href="#" target="FE17" id="FE17" style="cursor: pointer">
+					<area shape="rect" coords="322,189,356,213" href="#" target="FE18" id="FE18" style="cursor: pointer">
+					<area shape="rect" coords="319,283,348,309" href="#" target="FE25" id="FE25" style="cursor: pointer">
+					<area shape="rect" coords="371,320,394,350" href="#" target="FE28" id="FE28" style="cursor: pointer">
+					<area shape="rect" coords="373,355,395,389" href="#" target="FE29" id="FE29" style="cursor: pointer">
+					<area shape="rect" coords="339,318,363,353" href="#" target="FE27" id="FE27" style="cursor: pointer">
+					<area shape="rect" coords="315,318,338,353" href="#" target="FE26" id="FE26" style="cursor: pointer">
+					<area shape="rect" coords="315,355,335,386" href="#" target="FE31" id="FE31" style="cursor: pointer">
+					<area shape="rect" coords="339,356,360,385" href="#" target="FE30" id="FE30" style="cursor: pointer">
+					<area shape="rect" coords="177,316,202,352" href="#" target="FE37" id="FE37" style="cursor: pointer">
+					<area shape="rect" coords="154,314,177,351" href="#" target="FE36" id="FE36" style="cursor: pointer">
+					<area shape="rect" coords="125,321,145,345" href="#" target="FE35" id="FE35" style="cursor: pointer">
+					<area shape="rect" coords="125,353,145,388" href="#" target="FE34" id="FE34" style="cursor: pointer">
+					<area shape="rect" coords="153,349,175,385" href="#" target="FE33" id="FE33" style="cursor: pointer">
+					<area shape="rect" coords="180,352,201,386" href="#" target="FE32" id="FE32" style="cursor: pointer">
+					<area shape="rect" coords="146,284,174,307" href="#" target="FE38" id="FE38" style="cursor: pointer">
+					<area shape="rect" coords="52,127,65,140" href="#" target="FW6" id="FW6" style="cursor: pointer">
+					<area shape="rect" coords="53,141,65,155" href="#" target="FW5" id="FW5" style="cursor: pointer">
+					<area shape="rect" coords="53,157,64,171" href="#" target="FW4" id="FW4" style="cursor: pointer">
+					<area shape="rect" coords="52,183,65,193" href="#" target="FW3" id="FW3" style="cursor: pointer">
+					<area shape="rect" coords="53,197,64,208" href="#" target="FW2" id="FW2" style="cursor: pointer">
+					<area shape="rect" coords="54,211,65,225" href="#" target="FW1" id="FW1" style="cursor: pointer">
+					<area shape="rect" coords="207,108,220,120" href="#" target="FW9" id="FW9" style="cursor: pointer">
+					<area shape="rect" coords="207,122,219,133" href="#" target="FW10" id="FW10" style="cursor: pointer">
+					<area shape="rect" coords="207,134,218,147" href="#" target="FW11" id="FW11" style="cursor: pointer">
+					<area shape="rect" coords="205,149,221,161" href="#" target="FW12" id="FW12" style="cursor: pointer">
+					<area shape="rect" coords="206,163,219,176" href="#" target="FW13" id="FW13" style="cursor: pointer">
+					<area shape="rect" coords="225,164,235,176" href="#" target="FW14" id="FW14" style="cursor: pointer">
+					<area shape="rect" coords="224,149,236,161" href="#" target="FW15" id="FW15" style="cursor: pointer">
+					<area shape="rect" coords="223,136,238,148" href="#" target="FW16" id="FW16" style="cursor: pointer">
+					<area shape="rect" coords="224,123,236,135" href="#" target="FW17" id="FW17" style="cursor: pointer">
+					<area shape="rect" coords="226,107,236,121" href="#" target="FW18" id="FW18" style="cursor: pointer">
+					<area shape="rect" coords="241,108,252,121" href="#" target="FW19" id="FW19" style="cursor: pointer">
+					<area shape="rect" coords="239,121,253,134" href="#" target="FW20" id="FW20" style="cursor: pointer">
+					<area shape="rect" coords="239,136,252,147" href="#" target="FW21" id="FW21" style="cursor: pointer">
+					<area shape="rect" coords="239,150,254,161" href="#" target="FW22" id="FW22" style="cursor: pointer">
+					<area shape="rect" coords="239,163,253,176" href="#" target="FW23" id="FW23" style="cursor: pointer">
+					<area shape="rect" coords="255,164,272,176" href="#" target="FW24" id="FW24" style="cursor: pointer">
+					<area shape="rect" coords="257,148,269,160" href="#" target="FW25" id="FW25" style="cursor: pointer">
+					<area shape="rect" coords="258,136,271,149" href="#" target="FW26" id="FW26" style="cursor: pointer">
+					<area shape="rect" coords="257,121,271,135" href="#" target="FW27" id="FW27" style="cursor: pointer">
+					<area shape="rect" coords="259,109,270,121" href="#" target="FW28" id="FW28" style="cursor: pointer">
+                  <area shape="rect" coords="375,162,387,177" href="#" target="FW31" id="FW31" style="cursor: pointer">
+		 		  <area shape="rect" coords="389,163,398,176" href="#" target="FW32" id="FW32" style="cursor: pointer">
+		 		  <area shape="rect" coords="359,195,371,211" href="#" target="FW33" id="FW33" style="cursor: pointer">
+		 		  <area shape="rect" coords="379,194,390,213" href="#" target="FW34" id="FW34" style="cursor: pointer">
+		 		  <area shape="rect" coords="356,284,370,304" href="#" target="FW38" id="FW38" style="cursor: pointer">
+		 		  <area shape="rect" coords="381,285,392,305" href="#" target="FW37" id="FW37" style="cursor: pointer">
+                  <area shape="rect" coords="391,416,406,428" href="#" target="FW39" id="FW39" style="cursor: pointer">
+                  <area shape="rect" coords="391,431,407,445" href="#" target="FW40" id="FW40" style="cursor: pointer">
+                  <area shape="rect" coords="391,446,407,459" href="#" target="FW41" id="FW41" style="cursor: pointer">
+                  <area shape="rect" coords="393,460,407,476" href="#" target="FW42" id="FW42" style="cursor: pointer">
+                  <area shape="rect" coords="285,429,299,445" href="#" target="FW43" id="FW43" style="cursor: pointer">
+                  <area shape="rect" coords="285,446,299,459" href="#" target="FW44" id="FW44" style="cursor: pointer">
+                  <area shape="rect" coords="285,460,298,475" href="#" target="FW45" id="FW45" style="cursor: pointer">
+                  <area shape="rect" coords="267,462,279,477" href="#" target="FW46" id="FW46" style="cursor: pointer">
+                  <area shape="rect" coords="266,448,280,460" href="#" target="FW47" id="FW47" style="cursor: pointer">
+                  <area shape="rect" coords="267,432,278,445" href="#" target="FW48" id="FW48" style="cursor: pointer">
+                  <area shape="rect" coords="278,375,290,393" href="#" target="FW49" id="FW49" style="cursor: pointer">
+                  <area shape="rect" coords="277,361,292,373" href="#" target="FW50" id="FW50" style="cursor: pointer">
+                  <area shape="rect" coords="279,346,291,360" href="#" target="FW51" id="FW51" style="cursor: pointer">
+                  <area shape="rect" coords="277,333,289,346" href="#" target="FW52" id="FW52" style="cursor: pointer">
+                  <area shape="rect" coords="277,318,290,333" href="#" target="FW53" id="FW53" style="cursor: pointer">
+                  <area shape="rect" coords="260,319,272,333" href="#" target="FW54" id="FW54" style="cursor: pointer">
+                  <area shape="rect" coords="260,334,272,349" href="#" target="FW55" id="FW55" style="cursor: pointer">
+                  <area shape="rect" coords="258,349,273,361" href="#" target="FW56" id="FW56" style="cursor: pointer">
+                  <area shape="rect" coords="260,361,273,373" href="#" target="FW57" id="FW57" style="cursor: pointer">
+                  <area shape="rect" coords="260,375,274,389" href="#" target="FW58" id="FW58" style="cursor: pointer">
+                  <area shape="rect" coords="243,376,256,386" href="#" target="FW59" id="FW59" style="cursor: pointer">
+                  <area shape="rect" coords="243,361,255,372" href="#" target="FW60" id="FW60" style="cursor: pointer">
+                  <area shape="rect" coords="242,347,257,360" href="#" target="FW61" id="FW61" style="cursor: pointer">
+                  <area shape="rect" coords="242,334,259,347" href="#" target="FW62" id="FW62" style="cursor: pointer">
+                  <area shape="rect" coords="243,316,259,333" href="#" target="FW63" id="FW63" style="cursor: pointer">
+                  <area shape="rect" coords="226,318,242,334" href="#" target="FW64" id="FW64" style="cursor: pointer">
+                  <area shape="rect" coords="226,336,242,348" href="#" target="FW65" id="FW65" style="cursor: pointer">
+                  <area shape="rect" coords="228,349,242,359" href="#" target="FW66" id="FW66" style="cursor: pointer">
+                  <area shape="rect" coords="225,360,242,374" href="#" target="FW67" id="FW67" style="cursor: pointer">
+                  <area shape="rect" coords="225,374,241,385" href="#" target="FW68" id="FW68" style="cursor: pointer">
+                  <area shape="rect" coords="424,234,440,248" href="#" target="FW35" id="FW35" style="cursor: pointer">
+                  <area shape="rect" coords="426,249,444,267" href="#" target="FW36" id="FW36" style="cursor: pointer">
+                  <area shape="rect" coords="52,234,73,248" href="#" target="FW78" id="FW78" style="cursor: pointer">
+                  <area shape="rect" coords="51,250,69,263" href="#" target="FW77" id="FW77" style="cursor: pointer">
+                  <area shape="rect" coords="53,263,70,282" href="#" target="FW76" id="FW76" style="cursor: pointer">
+                  <area shape="rect" coords="54,295,74,311" href="#" target="FW75" id="FW75" style="cursor: pointer">
+                  <area shape="rect" coords="104,284,116,302" href="#" target="FW74" id="FW74" style="cursor: pointer">
+                  <area shape="rect" coords="127,285,140,303" href="#" target="FW73" id="FW73" style="cursor: pointer">
+                  <area shape="rect" coords="93,316,105,337" href="#" target="FW71" id="FW71" style="cursor: pointer">
+                  <area shape="rect" coords="108,317,122,335" href="#" target="FW72" id="FW72" style="cursor: pointer">
+                </map>
+		</div>
+		  <div class="col-lg-6" id="second_floor" style="display: none">
+			<img src="images/0003.jpg" alt="" width="500" usemap="#second_map" id="second_map"/>
+		 		<map name="second_map">
+				  <area shape="rect" coords="16,29,89,168" href="#" target="SCH1" id="SCH1" style="cursor: pointer">
+                  <area shape="rect" coords="250,420,317,478" href="#" target="SCH2" id="SCH2" style="cursor: pointer">
+                  <area shape="rect" coords="173,418,250,478" href="#" target="SCH3" id="SCH3" style="cursor: pointer">
+                  <area shape="rect" coords="10,419,104,478" href="#" target="SCH4" id="SCH4" style="cursor: pointer">
+                  <area shape="rect" coords="10,365,104,418" href="#" target="SCH5" id="SCH5" style="cursor: pointer">
+                  <area shape="rect" coords="9,317,106,363" href="#" target="SCH6" id="SCH6" style="cursor: pointer">
+                  <area shape="rect" coords="96,77,125,120" href="#" target="SE1" id="SE1" style="cursor: pointer">
+                  <area shape="rect" coords="129,80,154,119" href="#" target="SE2" id="SE2" style="cursor: pointer">
+                  <area shape="rect" coords="182,132,202,174" href="#" target="SE3" id="SE3" style="cursor: pointer">
+                  <area shape="rect" coords="208,144,236,175" href="#" target="SE4" id="SE4" style="cursor: pointer">
+                  <area shape="rect" coords="243,145,263,179" href="#" target="SE5" id="SE5" style="cursor: pointer">
+                  <area shape="rect" coords="267,142,288,178" href="#" target="SE6" id="SE6" style="cursor: pointer">
+                  <area shape="rect" coords="296,144,320,180" href="#" target="SE7" id="SE7" style="cursor: pointer">
+                  <area shape="rect" coords="320,144,341,180" href="#" target="SE8" id="SE8" style="cursor: pointer">
+                  <area shape="rect" coords="351,145,375,181" href="#" target="SE9" id="SE9" style="cursor: pointer">
+                  <area shape="rect" coords="376,145,397,180" href="#" target="SE10" id="SE10" style="cursor: pointer">
+                  <area shape="rect" coords="320,188,357,214" href="#" target="SE11" id="SE11" style="cursor: pointer">
+                  <area shape="rect" coords="425,183,452,219" href="#" target="SE12" id="SE12" style="cursor: pointer">
+                  <area shape="rect" coords="461,184,486,219" href="#" target="SE13" id="SE13" style="cursor: pointer">
+                  <area shape="rect" coords="448,225,488,250" href="#" target="SE14" id="SE14" style="cursor: pointer">
+                  <area shape="rect" coords="449,251,489,275" href="#" target="SE15" id="SE15" style="cursor: pointer">
+                  <area shape="rect" coords="457,279,484,314" href="#" target="SE16" id="SE16" style="cursor: pointer">
+                  <area shape="rect" coords="426,279,451,316" href="#" target="SE17" id="SE17" style="cursor: pointer">
+                  <area shape="rect" coords="318,285,354,311" href="#" target="SE18" id="SE18" style="cursor: pointer">
+                  <area shape="rect" coords="319,316,350,338" href="#" target="SE19" id="SE19" style="cursor: pointer">
+                  <area shape="rect" coords="319,338,350,360" href="#" target="SE20" id="SE20" style="cursor: pointer">
+                  <area shape="rect" coords="319,365,352,390" href="#" target="SE21" id="SE21" style="cursor: pointer">
+                  <area shape="rect" coords="227,354,248,377" href="#" target="SE22" id="SE22" style="cursor: pointer">
+                  <area shape="rect" coords="228,315,251,341" href="#" target="SE23" id="SE23" style="cursor: pointer">
+                  <area shape="rect" coords="193,317,216,341" href="#" target="SE24" id="SE24" style="cursor: pointer">
+                  <area shape="rect" coords="192,354,216,380" href="#" target="SE25" id="SE25" style="cursor: pointer">
+                  <area shape="rect" coords="130,365,153,392" href="#" target="SE26" id="SE26" style="cursor: pointer">
+                  <area shape="rect" coords="132,332,152,353" href="#" target="SE27" id="SE27" style="cursor: pointer">
+                  <area shape="rect" coords="211,102,224,114" href="#" target="SW1" id="SW1" style="cursor: pointer">
+                  <area shape="rect" coords="211,115,224,130" href="#" target="SW2" id="SW2" style="cursor: pointer">
+                  <area shape="rect" coords="211,128,225,142" href="#" target="SW3" id="SW3" style="cursor: pointer">
+                  <area shape="rect" coords="247,131,261,142" href="#" target="SW4" id="SW4" style="cursor: pointer">
+                  <area shape="rect" coords="246,117,262,128" href="#" target="SW5" id="SW5" style="cursor: pointer">
+                  <area shape="rect" coords="247,103,263,114" href="#" target="SW6" id="SW6" style="cursor: pointer">
+                  <area shape="rect" coords="268,103,281,115" href="#" target="SW13" id="SW13" style="cursor: pointer">
+                  <area shape="rect" coords="268,116,283,127" href="#" target="SW14" id="SW14" style="cursor: pointer">
+                  <area shape="rect" coords="267,130,281,142" href="#" target="SW15" id="SW15" style="cursor: pointer">
+                  <area shape="rect" coords="301,131,318,144" href="#" target="SW16" id="SW16" style="cursor: pointer">
+                  <area shape="rect" coords="300,116,318,127" href="#" target="SW17" id="SW17" style="cursor: pointer">
+                  <area shape="rect" coords="297,103,316,115" href="#" target="SW18" id="SW18" style="cursor: pointer">
+                  <area shape="rect" coords="323,100,340,115" href="#" target="SW19" id="SW19" style="cursor: pointer">
+                  <area shape="rect" coords="323,116,338,129" href="#" target="SW20" id="SW20" style="cursor: pointer">
+                  <area shape="rect" coords="323,129,341,142" href="#" target="SW21" id="SW21" style="cursor: pointer">
+                  <area shape="rect" coords="352,130,372,145" href="#" target="SW22" id="SW22" style="cursor: pointer">
+                  <area shape="rect" coords="352,116,373,130" href="#" target="SW23" id="SW23" style="cursor: pointer">
+                  <area shape="rect" coords="351,102,375,116" href="#" target="SW24" id="SW24" style="cursor: pointer">
+                  <area shape="rect" coords="380,193,398,212" href="#" target="SW28" id="SW28" style="cursor: pointer">
+                  <area shape="rect" coords="357,192,371,211" href="#" target="SW27" id="SW27" style="cursor: pointer">
+                  <area shape="rect" coords="425,232,443,248" href="#" target="SW29" id="SW29" style="cursor: pointer">
+                  <area shape="rect" coords="427,249,442,266" href="#" target="SW30" id="SW30" style="cursor: pointer">
+                  <area shape="rect" coords="381,287,398,303" href="#" target="SW31" id="SW31" style="cursor: pointer">
+                  <area shape="rect" coords="357,288,369,303" href="#" target="SW32" id="SW32" style="cursor: pointer">
+                  <area shape="rect" coords="353,325,364,335" href="#" target="SW33" id="SW33" style="cursor: pointer">
+                  <area shape="rect" coords="369,324,380,333" href="#" target="SW34" id="SW34" style="cursor: pointer">
+                  <area shape="rect" coords="385,322,397,336" href="#" target="SW35" id="SW35" style="cursor: pointer">
+                  <area shape="rect" coords="384,340,398,358" href="#" target="SW36" id="SW36" style="cursor: pointer">
+                  <area shape="rect" coords="368,341,380,360" href="#" target="SW37" id="SW37" style="cursor: pointer">
+                  <area shape="rect" coords="351,340,363,359" href="#" target="SW38" id="SW38" style="cursor: pointer">
+                  <area shape="rect" coords="352,373,364,391" href="#" target="SW39" id="SW39" style="cursor: pointer">
+                  <area shape="rect" coords="368,371,381,389" href="#" target="SW40" id="SW40" style="cursor: pointer">
+                  <area shape="rect" coords="383,369,394,390" href="#" target="SW41" id="SW41" style="cursor: pointer">
+                  <area shape="rect" coords="373,418,392,431" href="#" target="SW42" id="SW42" style="cursor: pointer">
+                  <area shape="rect" coords="373,433,393,445" href="#" target="SW43" id="SW43" style="cursor: pointer">
+                  <area shape="rect" coords="373,448,393,460" href="#" target="SW44" id="SW44" style="cursor: pointer">
+                  <area shape="rect" coords="373,460,395,475" href="#" target="SW45" id="SW45" style="cursor: pointer">
+                  <area shape="rect" coords="252,374,268,391" href="#" target="SW46" id="SW46" style="cursor: pointer">
+                  <area shape="rect" coords="253,356,266,371" href="#" target="SW47" id="SW47" style="cursor: pointer">
+                  <area shape="rect" coords="251,340,268,353" href="#" target="SW48" id="SW48" style="cursor: pointer">
+                  <area shape="rect" coords="252,325,269,338" href="#" target="SW49" id="SW49" style="cursor: pointer">
+                  <area shape="rect" coords="176,319,191,331" href="#" target="SW50" id="SW50" style="cursor: pointer">
+                  <area shape="rect" coords="176,332,188,348" href="#" target="SW51" id="SW51" style="cursor: pointer">
+                  <area shape="rect" coords="175,355,189,369" href="#" target="SW52" id="SW52" style="cursor: pointer">
+                  <area shape="rect" coords="174,370,189,387" href="#" target="SW53" id="SW53" style="cursor: pointer">
+                  <area shape="rect" coords="156,375,168,387" href="#" target="SW54" id="SW54" style="cursor: pointer">
+                  <area shape="rect" coords="155,356,167,365" href="#" target="SW55" id="SW55" style="cursor: pointer">
+                  <area shape="rect" coords="157,338,171,350" href="#" target="SW56" id="SW56" style="cursor: pointer">
+                  <area shape="rect" coords="155,322,173,335" href="#" target="SW57" id="SW57" style="cursor: pointer">
+                  <area shape="rect" coords="397,422,410,436" href="#" target="SW58" id="SW58" style="cursor: pointer">
+                  <area shape="rect" coords="397,437,411,447" href="#" target="SW59" id="SW59" style="cursor: pointer">
+                  <area shape="rect" coords="397,452,411,462" href="#" target="SW60" id="SW60" style="cursor: pointer">
+                  <area shape="rect" coords="396,463,411,477" href="#" target="SW61" id="SW61" style="cursor: pointer">
+                  <area shape="rect" coords="193,19,246,78" href="#" target="SC1" id="SC1" style="cursor: pointer">
+                  <area shape="rect" coords="283,19,338,78" href="#" target="SC2" id="SC2" style="cursor: pointer">
+                  <area shape="rect" coords="428,147,486,185" href="#" target="SC3" id="SC3" style="cursor: pointer">
+                  <area shape="rect" coords="426,399,481,442" href="#" target="SC4" id="SC4" style="cursor: pointer">
+                  <area shape="rect" coords="334,419,371,476" href="#" target="SC5" id="SC5" style="cursor: pointer">
+                </map>
+		</div>
+		<div class="col-lg-6">
+		<form>
+		  <div class="form-group">
+			  <label for="name">Name</label>
+			  <input type="text" id="name" placeholder="Name" class="form-control" required="required">
+			  <label for="designation">Designation</label>
+			  <input type="text" id="designation" placeholder="Designation" class="form-control" required="required">
+			  <label for="floor">Floor</label>
+			  <br>
+			  <select class="form-control" id="floor">
+				<option>Select Floor</option>
+				<option>GROUND FLOOR</option>
+				<option>FIRST FLOOR</option>
+				<option>SECOND FLOOR</option>
+			  </select>
+			  <label for="seat-type">Seat Type</label>
+			  <br>
+			  <select class="form-control" id="seat-type" >
+				<option>Select Type</option>
+				<option>Chamber</option>
+				<option>Cabin</option>
+				<option>Enclosure</option>
+				<option>Workstation</option>
+			  </select>
+			  <label for="seat-num">Seat Number</label>
+			  <input type="number" id="seat-num" class="form-control" required="required">
+			</div>
+		<button type="submit" class="btn btn-primary" id="add-employee">Add</button>
+		<button type="submit" class="btn btn-primary" id="update-employee">Update</button>
+		<button type="submit" class="btn btn-primary" id="empty-employee">Delete</button>
+
+
+		</form>
+		</div>
+	  </div>
+	</div>
+	</div>
+	<!-- PDF -->
+	<div class="p-5" style="width:800px;" >
+		<div id="table-ground" style="display: none" class="container">
+		<table border="2px" id="ground-pdf">
+			<tr height="50px"></tr>
+		<tr height="50px"><th style="font-size: 25px" colspan="5">Brief Detail of Seating Plan of NCRTC Corporate Office, Gatishakti Bhawan, INA(Ground Floor)</th><th class="date"></th></tr>
+		<tr>
+			<th colspan="6">
+			Accomodation
+			</th>
+		</tr>
+		<tr>
+			<th>Cabin</th>
+			<th>Enclosure</th>
+			<th colspan="4">Workstation</th>
+			
+		</tr>
+		<tr>
+			<td id="TGC1"></td>
+			<td id="TGE1"></td>
+			<td if ="TGW1"></td>
+			<td id="TGW10"></td>
+			<td id="TGW19"></td>
+			<td id="TGW28"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TGE2"></td>
+			<td id="TGW2"></td>
+			<td id="TGW11"></td>
+			<td id="TGW20"></td>
+			<td id="TGW29"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TGE3"></td>
+			<td id="TGW3"></td>
+			<td id="TGW12"></td>
+			<td id="TGW21"></td>
+			<td id="TGW30"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TGE4"></td>
+			<td id="TGW4"></td>
+			<td id="TGW13"></td>
+			<td id="TGW22"></td>
+			<td id="TGW31"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TGE5"></td>
+			<td id="TGW5"></td>
+			<td id="TGW14"></td>
+			<td id="TGW23"></td>
+			<td id="TGW32"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TGE6"></td>
+			<td id="TGW6"></td>
+			<td id="TGW15"></td>
+			<td id="TGW24"></td>
+			<td id="TGW33"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td id="TGW7"></td>
+			<td id="TGW16"></td>
+			<td id="TGW25"></td>
+			<td id="TGW34"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td id="TGW8"></td>
+			<td id="TGW17"></td>
+			<td id="TGW26"></td>
+			<td id="TGW35"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td id="TGW9"></td>
+			<td id="TGW18"></td>
+			<td id="TGW27"></td>
+			<td id="TGW36"></td>
+		</tr>
+			<tr height="20px" style="background: rgba(255,255,255,1.00)">
+				<td colspan="6"></td>
+			</tr>
+			<th colspan="6">ABBREVIATION</th>
+			<tr>
+				<td>Cabin - GC1, GC2...</td>
+				<td>Enclosure - GE1, GE2...</td>
+				<td>Workstation - GW1, GW2...</td>
+				<td>Meeting Rooms - GM1, GM2..</td>
+				<td>Pantry - GP1, GP2...</td>
+				<td>Washroom - GWR1, GWR2</td>
+			</tr>
+			<tr>
+				<th>Departments</th>
+				<th>Accomodation</th>
+				<th>Available</th>
+				<th>Vacant</th>
+			</tr>
+			<tr>
+				<td>Administration</td>
+				<td>Cabin</td>
+				<td>1</td>
+				<td name="gc-vacant">Nil</td>
+			</tr>
+			<tr>
+				<td>Corporate Communication</td>
+				<td>Enclosure</td>
+				<td>6</td>
+				<td name="ge-vacant">Nil</td>
+			</tr>
+			<tr>
+				<td>HR</td>
+				<td>Workstation</td>
+				<td>32</td>
+				<td name="gw-vacant">Nil</td>
+			</tr>
+			<tr>
+				<td>Rajbhasha Adhikari</td>
+				<td>Meeting Room</td>
+				<td>5</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Security</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr height="50px"></tr>
+		</table>
+	</div>
+		<div id="table-first" style="display: none">
+		<table border="2px" id="first-pdf">
+		<tr height="50px"></tr>
+				<tr height="50px"><th style="font-size: 25px" colspan="6">Brief Detail of Seating Plan of NCRTC Corporate Office, Gatishakti Bhawan, INA(First Floor)</th><th class="date"></th></tr>
+
+		<tr>
+			<th colspan="7">
+			Accomodation
+			</th>
+		</tr>
+		<tr>
+			<th>Cabin</th>
+			<th colspan="2">Enclosure</th>
+			<th colspan="4">Workstation</th>
+			
+		</tr>
+		<tr>
+			<td id="TFC1"></td>
+			<td id="TFE1"></td>
+			<td id="TFE22"></td>
+			<td id="TFW1"></td>
+			<td id="TFW22"></td>
+			<td id="TFW43"></td>
+			<td id="TFW64"></td>
+		</tr>
+		<tr>
+			<td id="TFC2"></td>
+			<td id="TFE2"></td>
+			<td id="TFE23"></td>
+			<td id="TFW2"></td>
+			<td id="TFW23"></td>
+			<td id="TFW44"></td>
+			<td id="TFW65"></td>
+		</tr>
+		<tr>
+			<td id="TFC3"></td>
+			<td id="TFE3"></td>
+			<td id="TFE24"></td>
+			<td id="TFW3"></td>
+			<td id="TFW24"></td>
+			<td id="TFW45"></td>
+			<td id="TFW66"></td>
+		</tr>
+		<tr>
+			<td id="TFC4"></td>
+			<td id="TFE4"></td>
+			<td id="TFE25"></td>
+			<td id="TFW4"></td>
+			<td id="TFW25"></td>
+			<td id="TFW46"></td>
+			<td id="TFW67"></td>
+		</tr>
+		<tr>
+			<td id="TFC5"></td>
+			<td id="TFE5"></td>
+			<td id="TFE26"></td>
+			<td id="TFW5"></td>
+			<td id="TFW26"></td>
+			<td id="TFW47"></td>
+			<td id="TFW68"></td>
+		</tr>
+		<tr>
+			<td id="TFC6"></td>
+			<td id="TFE6"></td>
+			<td id="TFE27"></td>
+			<td id="TFW6"></td>
+			<td id="TFW27"></td>
+			<td id="TFW48"></td>
+			<td id="TFW69"></td>
+		</tr>
+		<tr>
+			<td id="TFC7"></td>
+			<td id="TFE7"></td>
+			<td id="TFE28"></td>
+			<td id="TFW7"></td>
+			<td id="TFW28"></td>
+			<td id="TFW49"></td>
+			<td id="TFW70"></td>
+		</tr>
+		<tr>
+			<td id="TFC8"></td>
+			<td id="TFE8"></td>
+			<td id="TFE29"></td>
+			<td id="TFW8"></td>
+			<td id="TFW29"></td>
+			<td id="TFW50"></td>
+			<td id="TFW71"></td>
+		</tr>
+		<tr>
+			<td id="TFC9"></td>
+			<td id="TFE9"></td>
+			<td id="TFE30"></td>
+			<td id="TFW9"></td>
+			<td id="TFW30"></td>
+			<td id="TFW51"></td>
+			<td id="TFW72"></td>
+		</tr>
+		<tr>
+			<td id="TFC10"></td>
+			<td id="TFE10"></td>
+			<td id="TFE31"></td>
+			<td id="TFW10"></td>
+			<td id="TFW31"></td>
+			<td id="TFW52"></td>
+			<td id="TFW73"></td>
+		</tr>
+		<tr>
+			<td id="TFC11"></td>
+			<td id="TFE11"></td>
+			<td id="TFE32"></td>
+			<td id="TFW11"></td>
+			<td id="TFW32"></td>
+			<td id="TFW53"></td>
+			<td id="TFW74"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TFE12"></td>
+			<td id="TFE33"></td>
+			<td id="TFW12"></td>
+			<td id="TFW33"></td>
+			<td id="TFW54"></td>
+			<td id="TFW75"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TFE13"></td>
+			<td id="TFE34"></td>
+			<td id="TFW13"></td>
+			<td id="TFW34"></td>
+			<td id="TFW55"></td>
+			<td id="TFW76"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TFE14"></td>
+			<td id="TFE35"></td>
+			<td id="TFW14"></td>
+			<td id="TFW35"></td>
+			<td id="TFW56"></td>
+			<td id="TFW77"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TFE15"></td>
+			<td id="TFE36"></td>
+			<td id="TFW15"></td>
+			<td id="TFW36"></td>
+			<td id="TFW57"></td>
+			<td id="TFW78"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TFE16"></td>
+			<td id="TFE37"></td>
+			<td id="TFW16"></td>
+			<td id="TFW37"></td>
+			<td id="TFW58"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TFE17"></td>
+			<td id="TFE38"></td>
+			<td id="TFW17"></td>
+			<td id="TFW38"></td>
+			<td id="TFW59"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TFE18"></td>
+			<td id="TFE39"></td>
+			<td id="TFW18"></td>
+			<td id="TFW39"></td>
+			<td id="TFW60"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TFE19"></td>
+			<td id="TFE40"></td>
+			<td id="TFW19"></td>
+			<td id="TFW40"></td>
+			<td id="TFW61"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TFE20"></td>
+			<td id="TFE41"></td>
+			<td id="TFW20"></td>
+			<td id="TFW41"></td>
+			<td id="TFW62"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TFE21"></td>
+			<td></td>
+			<td id="TFW21"></td>
+			<td id="TFW42"></td>
+			<td id="TFW63"></td>
+			<td></td>
+		</tr>
+		<tr height="20px" style="background: rgba(255,255,255,1.00)">
+				<td colspan="7"></td>
+			</tr>
+			<th colspan="7">ABBREVIATION</th>
+			<tr>
+				<td>Cabin - FC1, FC2...</td>
+				<td>Enclosure - FE1, FE2...</td>
+				<td>Workstation - FW1, FW2...</td>
+				<td>Meeting Rooms - FM1, FM2..</td>
+				<td>Pantry - FP1, FP2...</td>
+				<td>Washroom - FWR1, FWR2...</td>
+				<td>Service Room - FSR1, FSR2...</td>
+			</tr>
+			<tr>
+				<th>Departments</th>
+				<th>Accomodation</th>
+				<th>Available</th>
+				<th>Vacant</th>
+			</tr>
+			<tr>
+				<td>Contract&amp;Dispute Resolution</td>
+				<td>Cabin</td>
+				<td>11</td>
+				<td name="fc-vacant">Nil</td>
+			</tr>
+			<tr>
+				<td>Procurement</td>
+				<td>Enclosure</td>
+				<td>41</td>
+				<td name="fe-vacant">Nil</td>
+			</tr>
+			<tr>
+				<td>S&amp;T</td>
+				<td>Workstation</td>
+				<td>74</td>
+				<td name="fw-vacant">Nil</td>
+			</tr>
+			<tr>
+				<td>IT</td>
+				<td>Meeting Room</td>
+				<td>5</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Electrical</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>JFPR</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr height="50px"></tr>
+		</table>
+	</div>
+		<div id="table-second" style="display: none">
+	<table border="2px" id ="second-pdf">
+		<tr height="50px"></tr>
+		<tr height="50px"><th style="font-size: 25px" colspan="6">Brief Detail of Seating Plan of NCRTC Corporate Office, Gatishakti Bhawan, INA(Second Floor)</th><th class="date"></th></tr>
+
+		<tr>
+			<th colspan="7">
+			Accomodation
+			</th>
+		</tr>
+		<tr>
+			<th>Chamber/Cabin</th>
+			<th colspan="2">Enclosure</th>
+			<th colspan="4">Workstation</th>	
+		</tr>
+		<tr>
+			<td id="TSCH1"></td>
+			<td id="TSE1"></td>
+			<td id="TSE16"></td>
+			<td id="TSW1"></td>
+			<td id="TSW17"></td>
+			<td id="TSW32"></td>
+			<td id="TSW47"></td>
+		</tr>
+		<tr>
+			<td id="TSCH2"></td>
+			<td id="TSE2"></td>
+			<td id="TSE17"></td>
+			<td id="TSW2"></td>
+			<td id="TSW18"></td>
+			<td id="TSW33"></td>
+			<td id="TSW48"></td>
+		</tr>
+		<tr>
+			<td id="TSCH3"></td>
+			<td id="TSE3"></td>
+			<td id="TSE18"></td>
+			<td id="TSW3"></td>
+			<td id="TSW19"></td>
+			<td id="TSW34"></td>
+			<td id="TSW49"></td>
+		</tr>
+		<tr>
+			<td id="TSCH4"></td>
+			<td id="TSE4"></td>
+			<td id="TSE19"></td>
+			<td id="TSW4"></td>
+			<td id="TSW20"></td>
+			<td id="TSW35"></td>
+			<td id="TSW50"></td>
+		</tr>
+		<tr>
+			<td id="TSCH5"></td>
+			<td id="TSE5"></td>
+			<td id="TSE20"></td>
+			<td id="TSW5"></td>
+			<td id="TSW21"></td>
+			<td id="TSW36"></td>
+			<td id="TSW51"></td>
+		</tr>
+		<tr>
+			<td id="TSCH6"></td>
+			<td id="TSE6"></td>
+			<td id="TSE21"></td>
+			<td id="TSW6"></td>
+			<td id="TSW22"></td>
+			<td id="TSW37"></td>
+			<td id="TSW52"></td>
+		</tr>
+		<tr>
+			<td id="TSC1"></td>
+			<td id="TSE7"></td>
+			<td id="TSE22"></td>
+			<td rowspan="5" >SW7 - SW12 Space Converted to Open Space</td>
+			<td id="TSW23"></td>
+			<td id="TSW38"></td>
+			<td id="TSW53"></td>
+		</tr>
+		<tr>
+			<td id="TSC2"></td>
+			<td id="TSE8"></td>
+			<td id="TSE23"></td>
+			<td id="TSW24"></td>
+			<td id="TSW39"></td>
+			<td id="TSW54"></td>
+		</tr>
+		<tr>
+			<td id="TSC3"></td>
+			<td id="TSE9"></td>
+			<td id="TSE24"></td>
+			<td id="TSW25"></td>
+			<td id="TSW40"></td>
+			<td id="TSW55"></td>
+		</tr>
+		<tr>
+			<td id="TSC4"></td>
+			<td id="TSE10"></td>
+			<td id="TSE25"></td>
+			<td id="TSW26"></td>
+			<td id="TSW41"></td>
+			<td id="TSW56"></td>
+		</tr>
+		<tr>
+			<td id="TSC5"></td>
+			<td id="TSE11"></td>
+			<td id="TSE26"></td>
+			<td id="TSW27"></td>
+			<td id="TSW42"></td>
+			<td id="TSW57"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TSE12"></td>
+			<td id="TSE27"></td>
+			<td id="TSW13"></td>
+			<td id="TSW28"></td>
+			<td id="TSW43"></td>
+			<td id="TSW58"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TSE13"></td>
+			<td></td>
+			<td id="TSW14"></td>
+			<td id="TSW29"></td>
+			<td id="TSW44"></td>
+			<td id="TSW59"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TSE14"></td>
+			<td></td>
+			<td id="TSW15"></td>
+			<td id="TSW30"></td>
+			<td id="TSW45"></td>
+			<td id="TSW60"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td id="TSE15"></td>
+			<td></td>
+			<td id="TSW16"></td>
+			<td id="TSW31"></td>
+			<td id="TSW46"></td>
+			<td id="TSW61"></td>
+		</tr>
+		<tr height="20px" style="background: rgba(255,255,255,1.00)">
+				<td colspan="7"></td>
+			</tr>
+			<th colspan="7">ABBREVIATION</th>
+			<tr>
+				<td>Chamber - SCH1, SCH2...&nbsp;Cabin - FC1, FC2...</td>
+				<td>Enclosure - SE1, SE2...</td>
+				<td>Workstation - SW1, SW2...</td>
+				<td>Meeting Rooms - SM1, SM2..</td>
+				<td>Pantry - SP1, SP2...</td>
+				<td>Washroom - SWR1, SWR2...</td>
+				<td>Service Room - SSR1, SSR2...</td>
+			</tr>
+			<tr>
+				<th>Departments</th>
+				<th>Accomodation</th>
+				<th>Available</th>
+				<th>Vacant</th>
+			</tr>
+			<tr>
+				<td>Administration</td>
+				<td>Chamber</td>
+				<td>6</td>
+				<td name="sch-vacant">Nil</td>
+			</tr>
+			<tr>
+				<td>Architect</td>
+				<td>Cabin</td>
+				<td>5</td>
+				<td name = "sc-vacant">Nil</td>
+			</tr>
+			<tr>
+				<td>Strategic &amp; Planneing</td>
+				<td>Enclosure</td>
+				<td>27</td>
+				<td name="se-vacant">Nil</td>
+			</tr>
+			<tr>
+				<td>Vigilance</td>
+				<td>Workstation</td>
+				<td>55</td>
+				<td name="sw-vacant">Nil</td>
+			</tr>
+			<tr>
+				<td>Finance</td>
+				<td>Meeting Room</td>
+				<td>5</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>RM &amp; LVC</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>JFPR</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		<tr height="50px"></tr>
+		</table>
+	</div>
+	</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed --> 
+    <script src="js/popper.min.js"></script>
+  	<script src="js/bootstrap-4.4.1.js"></script>
+	<script type="module" src="js/index.js"></script>
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+	<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+	<script src="js/jspdf.plugin.autotable.js"></script>
+	
+	<script>
+		const day_name = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+            
+            const month_name = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var d = new Date();
+            var cell = document.getElementsByClassName("date");
+            var day = d.getDay();
+            var month = d.getMonth();
+
+            cell[0].innerHTML=day_name[day-1]+", "+d.getDate()+"/"+month_name[month]+"/"+d.getFullYear();
+            cell[1].innerHTML=day_name[day-1]+", "+d.getDate()+"/"+month_name[month]+"/"+d.getFullYear();
+            cell[2].innerHTML=day_name[day-1]+", "+d.getDate()+"/"+month_name[month]+"/"+d.getFullYear();
+
+		window.jsPDF = window.jspdf.jsPDF;
+	
+		document.getElementById("print-button").addEventListener('click',()=>{
+			var ground_pdf = document.getElementById("ground-pdf");
+			var first_pdf = document.getElementById("first-pdf");
+			var second_pdf = document.getElementById("second-pdf");
+			var doc = new jsPDF({orientation: "l",unit:"px",format: "A4"});
+			
+			
+			ground_pdf.width = 1400;
+			first_pdf.width = 2180;
+			second_pdf.width = 1980;
+			/*doc.html(document.getElementById("ground-pdf"), {
+   			callback: function (doc) {
+     		doc.save();
+			},
+   			x: 10,
+   			y: 10,
+			width: 50
+			});*/
+			var id = null;
+			var file_name = null;
+			switch(document.getElementById("floor_map").value){
+				case "1": id = "ground-pdf"; file_name="Ground_Floor_Seating_Plan_"+Date()+"_.pdf";break;
+				case "2": id = "first-pdf"; file_name="First_Floor_Seating_Plan_"+Date()+"_.pdf";break;
+				case "3": id = "second-pdf"; file_name="Second_Floor_Seating_Plan_"+Date()+"_.pdf";break;
+			}
+			html2canvas(document.getElementById(id)).then(function(canvas){
+				let width = doc.internal.pageSize.getWidth()
+				let height = doc.internal.pageSize.getHeight()
+				let widthRatio = width / canvas.width;
+				let heightRatio = height / canvas.height;
+				let ratio = widthRatio > heightRatio ? heightRatio : widthRatio
+				doc.addImage(
+  					canvas.toDataURL('image/jpeg', 1.0),
+  					'JPEG',
+				  	(width-(canvas.width * ratio))/2,
+				  	0,
+				  	canvas.width * ratio,
+				  	canvas.height * ratio,
+				);
+        		doc.save(file_name);
+				ground_pdf.width = 800;
+			first_pdf.width = 800;
+			second_pdf.width = 800;
+
+			});
+		});
+
+	</script>
+	
+	  
+  </body>
+</html>
