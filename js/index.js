@@ -55,16 +55,18 @@ const firebaseConfig = {
   var table_first = document.getElementById("table-first");
   var table_second = document.getElementById("table-second");
 
-var location_select = documemnt.getElementById("maps");
+var location_select = document.getElementById("location_maps");
 var gatishakti = document.getElementById("gatishaktiBhawan");
 var stations = document.getElementById("station_data")
 location_select.addEventListener("location", ()=>{
 	switch(location_select.selectedIndex){
 		case 0:gatishakti.style.display = "block";
-				stations.style.display = "none";
+				seat_data.style.display = "none";
+			console.log("gatishakti");
 			break;
 		case 1:gatishakti.style.display = "none";
-				stations.style.display = "block";
+				seat_data.style.display = "block";
+			console.log("station");
 			break;
 	}
 });
@@ -340,10 +342,10 @@ function data_table(){
 		for(var i = 1; i<tid.length;i++){
 			if(id!=null){
 				id += tid[i];
-				console.log("id = "+ id);
+				
 			}else {
 				id = tid[i];
-				console.log("id = "+ id);
+				
 			}
 		}
 		elem.addEventListener('click',()=>{
@@ -420,15 +422,7 @@ function data_table(){
 					  break;
 			  }break;
 		  }
-		  console.log("s_vacant_workstation"+ s_vacant_workstation);
-		  console.log("s_vacant_enclosure"+ s_vacant_enclosure);
-		  console.log("s_vacant_cabin"+ s_vacant_cabin);
-		  console.log("f_vacant_enclosure"+ f_vacant_enclosure);
-		  console.log("f_vacant_workstation"+ f_vacant_workstation);
-		  console.log("f_vacant_cabin"+ f_vacant_cabin);
-		  console.log("g_vacant_enclosure"+ g_vacant_enclosure);
-		  console.log("g_vacant_workstation"+ g_vacant_workstation);
-		  console.log("g_vacant_cabin"+ g_vacant_cabin);
+		  
 		  elem.innerHTML = id+" - Vacant";
       
       }
